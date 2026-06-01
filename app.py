@@ -92,10 +92,7 @@ def game(country_list):
         "With each attempt, we will show the distance and direction to the destination!",
         title="Game Rules"
     ))
-    
-    # Debug print
-    console.print(f"[dim gray]Hint (Secret Country): {data['name']}[/dim gray]")
-    
+        
     max_attempt = 6 #< Max attempts
     past_guess = [] #< Guess memory
 
