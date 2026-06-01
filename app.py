@@ -10,7 +10,7 @@ from rich.prompt import Prompt
 console = Console()
 
 
-# Math function that calculates the haversine distance between two locations
+# Math function that calculates the haversine distance between two locations (distace on a sphere)
 
 def haversine(phi1, lambda1, phi2, lambda2):
     r = 6371.0
@@ -24,7 +24,7 @@ def haversine(phi1, lambda1, phi2, lambda2):
     return round(r * c) # Distance in kilometers
 
 
-# Auxiliar function that calculates the arrow direction
+# Auxiliar function that calculates the arrow direction(s)
 
 def get_direction(lat_guess, lon_guess, lat_target, lon_target):
     direction = ""
@@ -40,11 +40,11 @@ def get_direction(lat_guess, lon_guess, lat_target, lon_target):
         
     return direction if direction else "📍"
 
-# API Getter
+# API Getter, returns json!
 def data_get():
     url = "https://countriesnow.space/api/v0.1/countries/positions"
     try:
-        console.print("[yellow]Connecting in API RestCountries...[/yellow]")
+        console.print("[yellow]Connecting to the RestCountries API...[/yellow]")
         answer = requests.get(url, timeout=15)
         answer.raise_for_status()
         return answer.json()
@@ -57,7 +57,7 @@ def data_get():
         
     return None
 
-# API Process
+# API Processong (generates the final "map")
 def data_process(data):
     if not data or data.get('error') is True:
         return None
@@ -75,17 +75,17 @@ def data_process(data):
     return countries
 
 
-# Game Loop Interface
+# Game Loop Interface :)
 
 def game(country_list):
     
-    # Randomly choose a country
+    # Randomly chooses a country
     country, data = random.choice(list(country_list.items()))
     
     
     console.clear()
     
-    # Print the game rules
+    # Prints the game rules
     console.print(Panel.fit(
         "[bold cyan]🌍 WORLDLE - GUESS THE COUNTRY 🌍[/bold cyan]\n"
         "You have 6 attempts to guess the secret country.\n"
@@ -93,7 +93,7 @@ def game(country_list):
         title="Game Rules"
     ))
         
-    max_attempt = 6 #< Max attempts
+    max_attempt = 6 #< Max attempts (we can change it to make it easier though)
     past_guess = [] #< Guess memory
 
     for attempt in range(1, max_attempt + 1):
@@ -128,14 +128,14 @@ def game(country_list):
             data['lat'], data['lon']
         )
         
-        # Save the guess in memory
+        # Saves the past guess on a list
         past_guess.append({
             "country": guess['name'],
             "distance": f"{dist} km",
             "direction": direction
         })
         
-        # Print the guesses
+        # Prints the guesses
         table = Table(title="🗺️ Your Guesses")
         table.add_column("Guessed Country", style="cyan")
         table.add_column("Distance to Target", style="magenta")
@@ -147,7 +147,7 @@ def game(country_list):
         console.clear()
         console.print(table)
 
-    # If the uses up all you attempts, end the game
+    # If the user uses up all their attempts, ends the game
     console.print(Panel(
         f"[bold red]💥 Game over! You've run out of attempts. 💥[/bold red]\n"
         f"The secret country was: [bold cyan]{data['name']}[/bold cyan]",

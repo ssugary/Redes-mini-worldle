@@ -14,7 +14,7 @@ O desenvolvimento deste projeto foi realizado pelos alunos:
 # 2. Worldle
 ## Contextualização
 
-O Worldle é um jogo singleplayer online onde o usuário deve adivinhar qual é o país secreto do dia. Nele, a cada tentativa do usuário, o jogo mostra a distância e a direção em que o país secreto está em relação à tentativa.
+O Worldle é um jogo singleplayer online onde o usuário deve adivinhar qual é o país secreto do dia. Nele, a cada tentativa do usuário, o jogo mostra a distância e a direção em que o país secreto está em relação à tentativa. No jogo original, o jogador se baseia no formato do território para acertar o país da vez; No entanto, nessa adaptação, o jogo se aproxima mais do jogo diário original wordle ao estar "refém" de apenas os seus próprios _guesses_.
 
 ---
 
