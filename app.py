@@ -38,20 +38,20 @@ def get_direction(lat_guess, lon_guess, lat_target, lon_target):
     elif lon_target < lon_guess:
         direction += "⬅️ W"
         
-    return direction if direction else "📍 Aqui"
+    return direction if direction else "📍"
 
 # API Getter
 def data_get():
     url = "https://countriesnow.space/api/v0.1/countries/positions"
     try:
-        console.print("[yellow]Conectando à API RestCountries...[/yellow]")
+        console.print("[yellow]Connecting in API RestCountries...[/yellow]")
         answer = requests.get(url, timeout=15)
         answer.raise_for_status()
         return answer.json()
     
     except requests.exceptions.RequestException as e:
         console.print(Panel(
-            f"[bold red]Network Error in Room 3E1![/bold red]\n{e}",
+            f"[bold red]Network Error![/bold red]\n{e}",
             title="⚠️ Critical Failure"
         ))
         
